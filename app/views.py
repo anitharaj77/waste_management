@@ -20,6 +20,7 @@ from django.core.serializers import serialize
 from django.http import FileResponse
 from django.template.loader import get_template
 from io import BytesIO
+from csv import writer
 
 from tensorflow.keras.preprocessing import image
 
@@ -58,12 +59,22 @@ def waste_prediction(new_image):
     predicted_value = output_class[np.argmax(predicted_array)]
     predicted_accuracy = round(np.max(predicted_array) * 100, 2)
 
-    return "Your waste material is " + str(predicted_value) + " with " + str(predicted_accuracy) +" % accuracy"
+    return str(predicted_value)
 
 
 def up(request):
-    txt = waste_prediction("C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\images\\test.jpg")
     return render(request, "upload_lite.html", {'txt': txt})
+    return render(request, "upload_lite.html")
+
+def classify(request):
+    List = [str( request.GET.get('loc', '')), str(txt)]
+    with open('waste.csv', 'a') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow(List)
+        f_object.close()
+    return render(request, "materials/" + txt + ".html")
+
+
 
 def image_upload_view(request):
     """Process images uploaded by users"""
