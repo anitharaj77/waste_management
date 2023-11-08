@@ -63,10 +63,11 @@ def waste_prediction(new_image):
 
 
 def up(request):
-    return render(request, "upload_lite.html", {'txt': txt})
     return render(request, "upload_lite.html")
 
 def classify(request):
+    #txt = waste_prediction("C:\\Users\\julia\\Documents\\Uni\\09_Semester\\temp\\project_anitha\\staticfiles\\images\\
+    txt = waste_prediction("C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\images\\test.jpg")
     List = [str( request.GET.get('loc', '')), str(txt)]
     with open('waste.csv', 'a') as f_object:
         writer_object = writer(f_object)
