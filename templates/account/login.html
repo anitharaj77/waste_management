@@ -1,0 +1,183 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/istockphoto-1384532150-612x612.jpg' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- <script>
+    function do_login() {
+      alert('Func called')
+      var email = $("#email").val();
+      var pass = $("#password").val();
+      
+      window.sessionStorage.setItem("username", email) 
+      window.sessionStorage.setItem("pass", pass) 
+      if (email != "" && pass != "") {
+        $.ajax
+          ({
+            mode: 'same-origin' ,
+            headers: {'X-CSRFToken': csrftoken},
+            url: '/loginaction',
+            method:'GET',
+            async: false,
+            data: {
+              email: email,
+              password: pass
+            },
+            success: function (response) {
+              if (response == "success") {
+                alert('Loggedin')
+              }
+              else {
+                alert("Wrong Details");
+              }
+            },
+            error: function(err){
+              console.log(err)
+            }
+          });
+      }
+
+      else {
+        alert("Please Fill All The Details");
+      }
+
+      return false;
+    }
+  </script> -->
+</head>
+{% block content %}
+<body class="img" style="background-image: url('{% static "images/bg2.jpg" %}')" ;>
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form class="login" method = "POST"  >
+                    {% csrf_token %}
+                    <div>
+                        <a href="#"><img src="{% static 'images/istockphoto-1384532150-612x612.jpg' %}" alt="Waste" class="logo-css"> </a>
+                    </div>
+                    <div class="form-control">
+
+                        <input type="text" id="username" name="username"> <label>Email</label>
+
+                    </div>
+
+                    <div class="form-control">
+
+                        <input type="password" id="password" name="password"> <label>Password</label>
+
+                    </div>
+                    <!-- <input type="submit" name="login" class="" value="Login" id="loginbtn"> -->
+                     <button class="btn btn-sm rounded-0 btn-primary button login__submit">Login</button>
+                </form>
+                <div class="social-login">
+                    <!-- <h3>log in via</h3> -->
+                    <div class="social-icons">
+                        <a href="#" id="myBtn" class="social-login__icon forgot">Forget Password?</a>
+                        <!-- <a href="#" class="social-login__icon fab fa-facebook"></a>
+                        <a href="#" class="social-login__icon fab fa-twitter"></a> -->
+                    </div>
+                    <!-- The Modal Start-->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header" style='height:63px;'>
+                                <h3 style="color:red; margin-bottom: 10px;">Forgot Password?</h3>
+                                <h4 style="color:#3948a4; margin-bottom: 10px;">Don't Worry !</h4>
+                                <h5 style="color:#1a9e9f;">Just provide your email and we can do the rest</h5>
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <center>
+                                        <input class="FP_Email" type="email" placeholder="Email Id" id="user_email"
+                                            required /><br>
+                                        <input class="FP_Submit" type="submit" id="resetpwd" name="resetpwd"
+                                            onclick="SendMail()" value="SUBMIT">
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- The Modal Over-->
+                </div>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+{% block ScriptBlock %}
+<script>
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    
+    const labels = document.querySelectorAll(".form-control label");
+
+    labels.forEach((label) => {
+        label.innerHTML = label.innerHTML
+
+            .split("")
+
+            .map(
+                (letter, idx) =>
+                    `<span style="transition-delay:${idx * 20}ms">${letter}</span>`
+            )
+
+            .join("");
+    });
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+{% endblock ScriptBlock %}
+
+</html>
