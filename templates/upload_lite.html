@@ -64,42 +64,18 @@
 
                         <!-- start -->
 
-                        <!--form method="post" enctype="multipart/form-data" url="{% url 'upload-image' $}">
-                        {% csrf_token %} {{ form.as_p }}
-                        <button type="submit">Upload</button>
-                    </form-->
-                        {% if img_obj %} <h3>Succesfully uploaded : {{ img_obj.title }}</h3>
+
+                        <div id="dropArea" class="file-drop-area new-area">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %} {{ form.as_p }}
+                                <button type="submit">Upload</button>
+                            </form>{% if img_obj %}  <h3>Succesfully uploaded : {{ img_obj.title }}</h3>
                             <img src="{{ img_obj.image.url }}" alt="connect" style="max-height:300px">
                         {% endif %}
-
+                        </div>
+                        <br>
                         <form action="/classify">
-                            <div id="dropArea" class="file-drop-area new-area">
-                                <span class="content-cover"></span>
-                                <span id="chooseBtn" class="fake-btn f-1">Choose file</span>
-                                <span class="file-msg f-2" id="filename"
-                                >or drag and drop your file here</span
-                                >
-                                <input
-                                        id="file" name="file"
-                                        class="file-input"
-                                        onchange="filetype()"
-                                        type="file"
-                                />
-                            </div>
-                            <div id="succ_Upld" class="succ_Upld">
-                                <img src="images/loading_gif3.gif" height="300vh" alt="Loading">
-                            </div>
-                            </span>
-                            <div id="fileError">
-                    <span class="fileError"
-                    >Invalid file type, please insert only file</span
-                    >
-                            </div>
-                            <div id="file_content" class="file_content">
-                    <span id="textArea" class="textArea">Hello</span
-                    ><span onclick="remove()"
-                            ><i class="fa removeBtn">&#xf1f8;</i></span></div>
-                            <br>
+
                             <label for="location">Select location:</label>
                             <select id="loc" name="loc">
                                 <option value="A">A</option>
@@ -258,6 +234,7 @@
         </script-->
 
     {% endblock ScriptBlock %}
+
     </body>
 {% endblock %}
 </html>

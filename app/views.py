@@ -1,30 +1,24 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib import auth
 from django.shortcuts import render
+from os import listdir
+from os.path import isfile, join
+from project10 import settings
 from .forms import ImageForm
 import numpy as np
 from tensorflow.keras.models import load_model
-import tensorflow as tf
-import matplotlib.pyplot as plt
-from django.http import HttpResponse, response
 import json
-import os
-from django.core.files.storage import FileSystemStorage
-from .models import *
-from django.contrib import messages
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect, JsonResponse
-import shutil
 from django.template import loader
 from django.core.serializers import serialize
-from django.http import FileResponse
-from django.template.loader import get_template
 from io import BytesIO
 from csv import writer
-
+from os import walk
+import os
 from tensorflow.keras.preprocessing import image
 
 output_class = ["batteries", "clothes", "e-waste", "glass", "light blubs", "metal", "organic", "paper", "plastic"]
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Create your views here.
@@ -45,12 +39,16 @@ def landing(request):
     return render(request, "landingPage.html")
 
 
-def waste_prediction(new_image):
-    model = load_model("C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\classifyWaste.h5")
-    test_image = image.load_img(new_image, target_size=(224, 224))
-    #plt.axis("off")
-    #plt.imshow(test_image)
-    #plt.show()
+def waste_prediction():
+    path = "C:\\Users\\julia\Documents\\Uni\\09_Semester\\temp\\project_anitha\\media\\images"
+    files = [f for f in listdir(path) if isfile(join(path, f))]
+    model = load_model("C:\\Users\\julia\\Documents\\Uni\\09_Semester\\temp\\project_anitha\\classifyWaste.h5")
+    test_image = image.load_img(path + "/" + files[0], target_size=(224, 224))
+    for f in os.listdir(path):
+        os.remove(os.path.join(path, f))
+    # plt.axis("off")
+    # plt.imshow(test_image)
+    # plt.show()
 
     test_image = image.img_to_array(test_image) / 255
     test_image = np.expand_dims(test_image, axis=0)
@@ -62,13 +60,10 @@ def waste_prediction(new_image):
     return str(predicted_value)
 
 
-def up(request):
-    return render(request, "upload_lite.html")
-
 def classify(request):
-    #txt = waste_prediction("C:\\Users\\julia\\Documents\\Uni\\09_Semester\\temp\\project_anitha\\staticfiles\\images\\
-    txt = waste_prediction("C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\images\\test.jpg")
-    List = [str( request.GET.get('loc', '')), str(txt)]
+    txt = waste_prediction()
+    # txt = waste_prediction("C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\images\\test.jpg")
+    List = [str(request.GET.get('loc', '')), str(txt)]
     with open('waste.csv', 'a') as f_object:
         writer_object = writer(f_object)
         writer_object.writerow(List)
@@ -76,16 +71,16 @@ def classify(request):
     return render(request, "materials/" + txt + ".html")
 
 
-
 def image_upload_view(request):
     """Process images uploaded by users"""
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            form.instance.title = "Test.png"
+            pic = form.save()
             # Get the current instance object to display in the template
             img_obj = form.instance
-            return render(request, '', {'form': form, 'img_obj': img_obj})
+            return render(request, 'upload_lite.html', {'form': form, 'img_obj': img_obj})
     else:
         form = ImageForm()
-        return render(request, '', {'form': form})
+        return render(request, 'upload_lite.html', {'form': form})
