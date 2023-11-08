@@ -1,95 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Plastic Waste Recycling</title>
-
-  <style>
-    h1 {
-      font-family: sans-serif;
-      font-size: 24px;
-      color: #2196F3;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.5;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    ul {
-      list-style-type: disc;
-      margin-left: 20px;
-      margin-bottom: 20px;
-    }
-
-    li {
-      margin-bottom: 5px;
-    }
-
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    h2 {
-      font-family: sans-serif;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    body {
-      background-image: url('https://i.picsum.photos/2000/1000?image=1001');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-
-    img {
-      display: block;
-      margin: 0 auto;
-      width: 50%;
-      height: auto;
-      margin-bottom: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plastic Waste Recycling</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
-  <h1>Plastic Waste Recycling</h1>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Plastic Waste Recycling</h1>
+    </header>
+    <br>
 
-  <p>The photo you uploaded appears to show plastic waste.</p>
+    <div class="container">
+        <div class="alert alert-danger">
+            <p class="lead">The analyzed picture is identified as <b>plastic waste</b>. Plastic pollution has severe consequences on ecosystems and marine life. It takes hundreds of years for plastic to decompose, and in the process, it releases harmful chemicals.</p>
+        </div>
 
+        <div class="alert alert-success">
+            <h4 class="alert-heading">Recycling Tips:</h4>
+            <ul>
+                <li>Check local recycling guidelines to understand what types of plastic are accepted.</li>
+                <li>Separate plastics from other waste to facilitate recycling processes.</li>
+                <li>Ensure that plastic items are clean and free of contaminants before recycling.</li>
+                <li>Look for recycling bins specifically designated for plastic waste in your community.</li>
+                <li>Reduce plastic consumption by opting for reusable alternatives, such as cloth bags and stainless steel containers.</li>
+                <li>Support initiatives and organizations working towards plastic waste reduction and environmental conservation.</li>
+            </ul>
+        </div>
 
-  <h2>How to Recycle Plastic Waste</h2>
-  <ul>
-    <li style="margin-bottom: 10px;">Rinse out all containers before recycling them.</li>
-    <li style="margin-bottom: 10px;">Flatten cardboard boxes and paper products to save space in recycling bins.</li>
-    <li style="margin-bottom: 10px;">Separate plastic bags from other recyclables.</li>
-    <li style="margin-bottom: 10px;">Check with your local recycling program to see what types of plastic they accept.</li>
-  </ul>
+        <p class="lead">By following these tips, you contribute to the reduction of plastic pollution and help create a healthier environment. Every small effort counts!</p>
 
+        <div class="text-center mt-4">
+            <a href="/up" class="btn btn-primary">Go Back</a>
+        </div>
+    </div>
 
-  <h2>Benefits of Recycling Plastic Waste</h2>
-  <ul>
-    <li style="margin-bottom: 10px;">Reduces the amount of plastic waste that goes to landfills.</li>
-    <li style="margin-bottom: 10px;">Conserves natural resources.</li>
-    <li style="margin-bottom: 10px;">Reduces greenhouse gas emissions.</li>
-    <li style="margin-bottom: 10px;">Creates jobs in the recycling industry.</li>
-  </ul>
-
-
-  <h2>Find a Recycling Center Near You</h2>
-  <p>To find a recycling center near you, you can use the following resources:</p>
-  <ul>
-    <li style="margin-bottom: 10px;"><a href="https://www.earth911.com/recycling/">Earth911</a></li>
-    <li style="margin-bottom: 10px;"><a href="https://www.recyclebank.com/">RecycleBank</a></li>
-  </ul>
-
-  <h2>Thank you for recycling!</h2>
-
-<br>
-<a href="/up">I want to do it again</a>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

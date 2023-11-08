@@ -1,21 +1,20 @@
-from django.shortcuts import redirect
+import numpy as np
+import os
+from csv import writer
+from datetime import datetime
 from django.contrib import auth
+from django.shortcuts import redirect
 from django.shortcuts import render
 from os import listdir
 from os.path import isfile, join
-from project10 import settings
-from .forms import ImageForm
-import numpy as np
 from tensorflow.keras.models import load_model
-import json
-from django.http import HttpResponseRedirect, JsonResponse
-from django.template import loader
-from django.core.serializers import serialize
-from io import BytesIO
-from csv import writer
-from os import walk
-import os
 from tensorflow.keras.preprocessing import image
+from .forms import ImageForm
+
+# path_media = "C:\\Users\\julia\Documents\\Uni\\09_Semester\\temp\\project_anitha\\media\\images"
+# path_model = "C:\\Users\\julia\\Documents\\Uni\\09_Semester\\temp\\project_anitha\\classifyWaste.h5"
+path_media = "C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\media\\images"
+path_model = "C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\classifyWaste.h5"
 
 output_class = ["batteries", "clothes", "e-waste", "glass", "light blubs", "metal", "organic", "paper", "plastic"]
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -40,15 +39,13 @@ def landing(request):
 
 
 def waste_prediction():
-    path = "C:\\Users\\julia\Documents\\Uni\\09_Semester\\temp\\project_anitha\\media\\images"
-    files = [f for f in listdir(path) if isfile(join(path, f))]
-    model = load_model("C:\\Users\\julia\\Documents\\Uni\\09_Semester\\temp\\project_anitha\\classifyWaste.h5")
-    test_image = image.load_img(path + "/" + files[0], target_size=(224, 224))
-    for f in os.listdir(path):
-        os.remove(os.path.join(path, f))
-    # plt.axis("off")
-    # plt.imshow(test_image)
-    # plt.show()
+    files = [f for f in listdir(path_media) if isfile(join(path_media, f))]
+    if len(files) == 0:
+        return -1
+    model = load_model(path_model)
+    test_image = image.load_img(path_media + "/" + files[0], target_size=(224, 224))
+    for f in os.listdir(path_media):
+        os.remove(os.path.join(path_media, f))
 
     test_image = image.img_to_array(test_image) / 255
     test_image = np.expand_dims(test_image, axis=0)
@@ -62,12 +59,12 @@ def waste_prediction():
 
 def classify(request):
     txt = waste_prediction()
-    # txt = waste_prediction("C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\images\\test.jpg")
-    List = [str(request.GET.get('loc', '')), str(txt)]
-    with open('waste.csv', 'a') as f_object:
+    if txt == -1:
+        return image_upload_view(request)
+    List = [str(request.GET.get('loc', '')), str(txt), datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+    with open('waste.csv', 'a', newline='') as f_object:
         writer_object = writer(f_object)
         writer_object.writerow(List)
-        f_object.close()
     return render(request, "materials/" + txt + ".html")
 
 
