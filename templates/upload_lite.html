@@ -30,8 +30,37 @@
 
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
+        <style>
+            /* Style for the loading indicator */
+            #loadingIndicator {
+                display: none;
+                margin-left: 10px;
+            }
+        </style>
     </head>
     <body>
+    <script>
+        function disableSubmitButton() {
+            // Disable the submit button
+            var submitButton = document.getElementById("submitBtn");
+            submitButton.disabled = true;
+
+            // Display the loading indicator
+            var loadingIndicator = document.getElementById("loadingIndicator");
+            loadingIndicator.style.display = "inline";
+
+            // Optionally, you can add a delay to simulate processing
+            // setTimeout(function() {
+            //   // Re-enable the submit button
+            //   submitButton.disabled = false;
+            //   // Hide the loading indicator
+            //   loadingIndicator.style.display = "none";
+            // }, 2000); // Simulating a 2-second processing time
+
+            // Return true to allow the form submission to proceed
+            return true;
+        }
+    </script>
     <div class="var_btns_back">
         <a href="/landing/" class="btn-css shake_left" title="Previous" id="next">
             <i class="fas fa-arrow-left"></i>
@@ -74,7 +103,7 @@
                         {% endif %}
                         </div>
                         <br>
-                        <form action="/classify">
+                        <form action="/classify" onsubmit="return disableSubmitButton()">
 
                             <label for="location">Select location:</label>
                             <select id="loc" name="loc">
@@ -92,8 +121,9 @@
                             </select>
 
                             <br>
-                            <input
-                                    type="submit"></input>
+                            <input type="submit" id="submitBtn"></input>
+                            <br>
+                            <span id="loadingIndicator">Loading...</span>
                         </form>
                     </div>
 
@@ -103,145 +133,6 @@
         </div>
     </div>
     </div>
-
-    {% block ScriptBlock %}
-        <!--script>
-              let pageArr = [
-                document.querySelector(".page-1"),
-                document.querySelector(".page-2"),
-                document.querySelector(".page-3"),
-                document.querySelector(".page-4"),
-              ];
-
-              for(var i=1;i<=20;i++){
-                var itemList = "item"+[i];
-              }
-
-              var allItems = itemList;
-
-              console.log(allItems);
-
-
-
-              var page1 = document.querySelector(".page-1");
-              var page2 = document.querySelector(".page-2");
-              var page3 = document.querySelector(".page-3");
-              var page4 = document.querySelector(".page-4");
-
-              var currPage = 1;
-              var totPage = pageArr.length;
-              var x;
-
-              document.getElementById("pageNo").innerHTML = currPage;
-
-              document.getElementById("totPage").innerHTML = totPage;
-
-              function pages(x) {
-                if (currPage == 2) {
-
-                  for (var i = 0; i < pageArr.length; i++) {
-                    var curr = pageArr[i];
-                    curr.classList.remove("active");
-                  }
-                  page2.classList.add("active");
-                  document.getElementById("pageNo").innerHTML = currPage;
-
-                } else if (currPage == 3) {
-                  for (var i = 0; i < pageArr.length; i++) {
-                    var curr = pageArr[i];
-                    curr.classList.remove("active");
-                  }
-                  page3.classList.add("active");
-                  document.getElementById("pageNo").innerHTML = currPage;
-                } else if (currPage == 4) {
-                  for (var i = 0; i < pageArr.length; i++) {
-                    var curr = pageArr[i];
-                    curr.classList.remove("active");
-                  }
-                  page4.classList.add("active");
-                  document.getElementById("pageNo").innerHTML = currPage;
-                } else {
-                  for (var i = 0; i < pageArr.length; i++) {
-                    var curr = pageArr[i];
-                    curr.classList.remove("active");
-                  }
-                  page1.classList.add("active");
-                  document.getElementById("pageNo").innerHTML = currPage;
-                }
-              }
-
-              function removeClass(x) {
-                page2.classList.remove("active");
-              }
-
-              function prev() {
-                if (currPage > 1) {
-                  currPage--;
-                  pages(currPage);
-                }
-              }
-
-              function next() {
-                if (currPage < totPage) {
-                  currPage++;
-                  pages(currPage);
-                }
-              }
-              pages(currPage);
-
-            //   Upload file JS
-
-            function filetype() {
-              var filename = document.getElementsByClassName("file-input")[0].value;
-              var dropArea = document.getElementById("dropArea");
-              var chooseBtn = document.getElementById("chooseBtn");
-              var loading = document.getElementById("succ_Upld");
-              var allowedExtensions = /(\.jpg)$/i;
-
-              var getFilename = function (str) {
-                return str.substring(str.lastIndexOf("\\") + 1);
-              };
-
-              if (!allowedExtensions.exec(filename)) {
-                document.getElementById("fileError").style.display = "block";
-                dropArea.style.borderColor = "#ce0000";
-                document.getElementsByClassName("file-input")[0].value = "";
-                chooseBtn.style.backgroundColor = "#2d4085";
-                return false;
-              }
-
-              if (getFilename(filename) != "") {
-                document.getElementById("filename").innerHTML =
-                  "File uploded sucessfully ✅";
-                document.getElementById("file_content").style.display = "block";
-                document.getElementById("textArea").innerHTML = getFilename(filename);
-                document.getElementById("fileError").style.display = "none";
-                dropArea.style.borderColor = "#029c9c";
-                dropArea.style.display = "none";
-                loading.style.display = "block";
-              } else {
-                document.getElementById("filename").innerHTML =
-                  "or drag and drop your file here";
-              }
-            }
-            function remove() {
-              document.getElementById("file").value = "";
-              document.getElementById("file_content").style.display = "none";
-              document.getElementById("filename").style.color = "#000";
-              document.getElementById("filename").innerHTML =
-                "or drag and drop your file here";
-              dropArea.style.borderColor = "#000";
-              dropArea.style.color = "#000";
-              chooseBtn.style.backgroundColor = "#029c9c";
-
-              document.getElementById("dropArea").style.display = "flex";
-              document.getElementById("succ_Upld").style.display = "none";
-            }
-
-        </script-->
-
-    {% endblock ScriptBlock %}
-
     </body>
 {% endblock %}
 </html>
