@@ -37,6 +37,8 @@ def login(request):
 def landing(request):
     return render(request, "landingPage.html")
 
+def dashboard(request):
+    return render(request, "dashboard.html")
 
 def waste_prediction():
     files = [f for f in listdir(path_media) if isfile(join(path_media, f))]
