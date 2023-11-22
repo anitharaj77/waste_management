@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html {lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -59,11 +59,10 @@
 </head>
 {% block content %}
 <body class="img" style="background-image: url('{% static "images/bg2.jpg" %}')" ;>
-
     <div class="container">
         <div class="screen">
             <div class="screen__content">
-                <form class="login" method = "POST"  >
+                <form class="login" action="/"  method = "POST"  >
                     {% csrf_token %}
                     <div>
                         <a href="#"><img src="{% static 'images/istockphoto-1384532150-612x612.jpg' %}" alt="Waste" class="logo-css"> </a>
@@ -77,7 +76,6 @@
                     <div class="form-control">
 
                         <input type="password" id="password" name="password"> <label>Password</label>
-
                     </div>
                     <!-- <input type="submit" name="login" class="" value="Login" id="loginbtn"> -->
                      <button class="btn btn-sm rounded-0 btn-primary button login__submit">Login</button>
@@ -126,7 +124,6 @@
     </div>
 </body>
 {% endblock %}
-
 {% block ScriptBlock %}
 <script>
     function setCookie(cname, cvalue, exdays) {
@@ -135,10 +132,7 @@
         let expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-
-    
     const labels = document.querySelectorAll(".form-control label");
-
     labels.forEach((label) => {
         label.innerHTML = label.innerHTML
 
@@ -151,26 +145,20 @@
 
             .join("");
     });
-
     // Get the modal
     var modal = document.getElementById("myModal");
-
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
-
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-
     // When the user clicks the button, open the modal 
     btn.onclick = function () {
         modal.style.display = "block";
     }
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
         modal.style.display = "none";
     }
-
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
@@ -179,5 +167,4 @@
     }
 </script>
 {% endblock ScriptBlock %}
-
 </html>

@@ -13,8 +13,8 @@ from .forms import ImageForm
 
 # path_media = "C:\\Users\\julia\Documents\\Uni\\09_Semester\\temp\\project_anitha\\media\\images"
 # path_model = "C:\\Users\\julia\\Documents\\Uni\\09_Semester\\temp\\project_anitha\\classifyWaste.h5"
-path_media = "C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\media\\images"
-path_model = "C:\\Users\\anith\\OneDrive\\Desktop\\projectk\\project10\\static\\classifyWaste.h5"
+path_media = "C:\\Users\\anith\\PycharmProjects\\waste_management\\media\images"
+path_model = "C:\\Users\\anith\\PycharmProjects\\waste_management\\staticfiles\\classifyWaste.h5"
 
 output_class = ["batteries", "clothes", "e-waste", "glass", "light blubs", "metal", "organic", "paper", "plastic"]
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))

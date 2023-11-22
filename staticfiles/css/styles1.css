@@ -14,13 +14,13 @@ body {
 
 .container {
   background: #e7fffe;
-  background-image: url(../images/Bg.png);
+  background-image: url(../images/img.png);
   background-size: cover;
   height: 100vh;
 }
 
 .heading {
-  color: #2e469c;
+  color: #003314;
   /* margin-top: 10px; */
   background-color: #fff;
   padding-top: 5px;
@@ -58,7 +58,7 @@ body {
   height: 85vh;
   width: 25vw;
   border-radius: 20px 0px 0px 20px;
-  background-color: #2e469c;
+  background-color: #003314;
   font-family: "Nunito Sans", sans-serif;
 }
 
@@ -679,7 +679,7 @@ div * {
   padding: 10px 12px;
   border-radius: 50%;
   border: none;
-  background-color: #2e469c;
+  background-color: #134D24;
   color: white;
   font-weight: 700;
   font-size: 25px;
